@@ -42,8 +42,8 @@ function App() {
         <button onClick={addTask}>Add Task</button>
       </div>
       <div className='list'>
-        {todoList.map((task) =>{
-          return <Task taskName={task.taskName} id={task.id} deleteTask={deleteTask} completed={task.completed} completeTask={completeTask} />
+        {todoList.map((task, index) =>{
+          return <Task taskName={task.taskName} id={task.id} deleteTask={deleteTask} completeTask={completeTask} bgColor={task.completed ? "green" : index%2 ? "white" : "gray"} />
         })}
       </div>
     </div>

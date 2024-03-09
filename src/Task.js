@@ -1,9 +1,9 @@
-export const Task = (props) =>{
+export const Task = ({taskName, id, deleteTask, completeTask, bgColor}) =>{
     return (
-        <div className="task" style={{backgroundColor: props.completed ? "green" : "white"}}>
-          <h1>{props.taskName}</h1>
-          <button onClick={() => props.completeTask(props.id)}>Complete</button>
-          <button onClick={() => props.deleteTask(props.id)}>X</button>
+        <div className="task" style={{backgroundColor: bgColor}}>
+          <h1>{taskName}</h1>
+          <button onClick={() => completeTask(id)}>Complete</button>
+          <button onClick={() => deleteTask(id)}>X</button>
         </div>
         )
 };
