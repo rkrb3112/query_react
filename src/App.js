@@ -4,27 +4,29 @@ import { Home } from './pages/Home';
 import { Menu } from './pages/Menu';
 import { Contact } from './pages/Contact';
 import { Navbar } from './Navbar';
-import { useState, createContext } from 'react';
-
-export const AppContext = createContext();
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
 
 function App() {
-
-  const [food, setFood] = useState("biryani");
-
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false
+      }
+    }
+  });
   return ( 
     <div className='App'>
-      <AppContext.Provider value={{food, setFood}}>
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/menu' element={<Menu />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='*' element={<h1>Does not exist</h1>} />
-          </Routes>
-        </Router>
-      </AppContext.Provider>
+      <QueryClientProvider client={client}>
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/menu' element={<Menu />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='*' element={<h1>Does not exist</h1>} />
+            </Routes>
+          </Router>
+      </QueryClientProvider>
     </div>
   );
 };
